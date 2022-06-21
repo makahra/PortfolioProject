@@ -152,6 +152,7 @@ JOIN PortfolioProject..CovidVaccinations$ vac
 WHERE dea.continent is not null
 --ORDER BY 2,3
 
+--Checking previously created view
 
 SELECT *
 From PercentPopulationVaccinated
