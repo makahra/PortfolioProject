@@ -22,7 +22,7 @@ ORDER BY 1,2
 SELECT Location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
 FROM PortfolioProject..CovidDeaths$
 WHERE Location like '%states%'
-and and continent is not null
+and continent is not null
 ORDER BY 1,2
 
 --Examining total_cases vs population in the USA as a percentage
