@@ -2,10 +2,12 @@
 
 Select*
 From PortfolioProject..CovidDeaths$
+WHERE continent is not null
 Order by 3,4
 
 --Select*
 --From PortfolioProject..CovidVaccinations$
+--WHERE continent is not null
 --Order by 3,4
 
 --Double checking data that will be used for project
@@ -20,6 +22,7 @@ ORDER BY 1,2
 SELECT Location, date, total_cases, total_deaths, (total_deaths/total_cases)*100 as DeathPercentage
 FROM PortfolioProject..CovidDeaths$
 WHERE Location like '%states%'
+and and continent is not null
 ORDER BY 1,2
 
 --Examining total_cases vs population in the USA as a percentage
@@ -38,7 +41,7 @@ GROUP BY Location, Population
 ORDER BY Percent_Population_Infected desc
 
 --Continents with the highest death count compared to population
---Numbers were not accurate, and had to add WHERE function for future syntaxes
+--Numbers were not accurate, and had to add WHERE function to past and future commands
 
 SELECT location, MAX(cast(total_deaths as int)) as Total_Death_Count
 FROM PortfolioProject..CovidDeaths$
@@ -128,6 +131,8 @@ JOIN PortfolioProject..CovidVaccinations$ vac
 	and dea.date = vac.date
 WHERE dea.continent is not null
 --ORDER BY 2,3
+
+--Checking table to be used for future visulizations 
 
 SELECT *, (RollingPeopleVaccinated/population)*100
 FROM #PercentPopulationVaccinated
