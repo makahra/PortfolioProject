@@ -26,22 +26,22 @@ and continent is not null
 ORDER BY 1,2
 
 --Examining total_cases vs population in the USA as a percentage
---Chance of catching COVID in relation to entire population
+--*Chance of catching COVID in relation to entire population
 
 SELECT Location, date, Population, total_cases, (total_cases/population)*100 AS Death_Percentage
 FROM PortfolioProject..CovidDeaths$
 WHERE Location like '%states%'
 ORDER BY 1,2
 
---Countries with highest infection rate compared to population
+--Countries with Highest Infection Rate Compared to Population
 
 SELECT Location, Population, MAX(total_cases) as Highest_Infection_Count, MAX(total_cases/population)*100 AS Percent_Population_Infected
 FROM PortfolioProject..CovidDeaths$
 GROUP BY Location, Population
 ORDER BY Percent_Population_Infected desc
 
---Continents with the highest death count compared to population
---Numbers were not accurate, and had to add WHERE function to past and future commands
+--Continents with the Highest Death Count Compared to Population
+--*Numbers were not accurate, and had to add WHERE function to past and future commands
 
 SELECT location, MAX(cast(total_deaths AS int)) AS Total_Death_Count
 FROM PortfolioProject..CovidDeaths$
@@ -49,7 +49,7 @@ WHERE continent is null
 GROUP BY location
 ORDER BY Total_Death_Count desc
 
---Countries with the highest death count compared to population
+--Countries with the Highest Death Count Compared to Population
 
 SELECT Location, MAX(cast(total_deaths AS int)) AS Total_Death_Count
 FROM PortfolioProject..CovidDeaths$
@@ -57,7 +57,7 @@ WHERE continent is not null
 GROUP BY Location
 ORDER BY Total_Death_Count desc
 
---Continents with the highest death count compared to population
+--Continents with the Highest Death Count Compared to Population
 
 SELECT continent, MAX(cast(total_deaths AS int)) AS Total_Death_Count
 FROM PortfolioProject..CovidDeaths$
@@ -66,7 +66,7 @@ GROUP BY continent
 ORDER BY Total_Death_Count desc
 
 
---Global numbers death percentage
+--Global Numbers Death Percentage
 
 SELECT SUM(new_cases) AS total_cases, SUM(cast(new_deaths as int)) as total_deaths, SUM(cast(new_deaths AS int))/SUM(new_cases)*100 AS Death_Percentage
 FROM PortfolioProject..CovidDeaths$
@@ -74,7 +74,7 @@ WHERE continent is not null
 --GROUP BY date
 ORDER BY 1,2
 
---Total population vs vaccinations
+--Total Population vs Vaccination Rate
 
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations 
 , SUM(CONVERT(int, vac.new_vaccinations)) OVER (Partition by dea.location ORDER BY dea.location, dea.date)
@@ -138,7 +138,7 @@ SELECT *, (RollingPeopleVaccinated/population)*100
 FROM #PercentPopulationVaccinated
 
 
---Views for later visulizations
+--Views for future visulizations
 
 CREATE View PercentPopulationVaccinated AS 
 SELECT dea.continent, dea.location, dea.date, dea.population, vac.new_vaccinations 
@@ -152,7 +152,7 @@ JOIN PortfolioProject..CovidVaccinations$ vac
 WHERE dea.continent is not null
 --ORDER BY 2,3
 
---Checking previously created view
+--Double Checking Previously Created View
 
 SELECT *
 From PercentPopulationVaccinated
